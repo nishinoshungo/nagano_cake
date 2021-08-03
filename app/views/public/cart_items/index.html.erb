@@ -1,0 +1,43 @@
+<h4>ショッピングカート</h4>
+<%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete %>
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% total_price = 0 %>
+    <% @cart_items.each do |cart_item| %>
+      <% tax_include_price = (cart_item.item.price * 1.1).floor %>
+      <% subtotal = (tax_include_price * cart_item.amount).floor %>
+      <tr>
+        <td><%= cart_item.item.name %></td>
+        <td><%= tax_include_price.to_s(:delimited) %></td>
+        <td>
+          <%= form_with model: cart_item, method: :patch, url: "/cart_items/#{cart_item.id}", local:true do |f| %>
+            <%= f.number_field :amount, min: 1 %>
+            <%= f.submit "変更" %>
+          <% end %>
+        </td>
+        <td><%= subtotal.to_s(:delimited) %></td>
+        <td><%= link_to "削除する", "/cart_items/#{cart_item.id}", method: :delete %></td>
+      </tr>
+      <% total_price = total_price + subtotal %>
+    <% end %>
+  </tbody>
+</table>
+<table>
+  <tbody>
+    <tr>
+      <td>合計金額</td>
+      <td>
+        <%= total_price.to_s(:delimited) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
