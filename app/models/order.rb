@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
 
   enum payment: {クレジットカード: 0, 銀行振込: 1}
+  
   enum order_status: {
     入金待ち: 1,
     入金確認: 2,
