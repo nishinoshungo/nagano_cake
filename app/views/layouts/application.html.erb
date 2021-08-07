@@ -10,6 +10,9 @@
 
   <body>
     <header>
+      <div class="header-logo">
+        <h1><%= link_to "ながのCAKE", root_path %></h1>
+      </div>
       <% if admin_signed_in? %>
         <li><%= link_to "商品一覧", admin_items_path %></li>
         <li><%= link_to "会員一覧", admin_customers_path %></li>
@@ -31,7 +34,7 @@
 
       <%= form_with url: "/search", method: :get, local:true do |f| %>
         <%= f.text_field :keyword %>
-        <%= f.submit "検索" %>
+        <%= f.submit "商品検索" %>
       <% end %>
 
     </header>
