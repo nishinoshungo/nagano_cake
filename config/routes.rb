@@ -42,6 +42,7 @@ Rails.application.routes.draw do
 
   get '/items', to: 'public/items#index'
   get '/items/:id', to: 'public/items#show', as: :item
+  get '/search', to: 'public/items#search'
 
   get '/cart_items', to: 'public/cart_items#index'
   patch '/cart_items/:id', to: 'public/cart_items#update'
