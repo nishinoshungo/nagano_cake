@@ -1,11 +1,4 @@
-<div>
-  <h5>ジャンル検索</h5>
-  <ul>
-    <% @genres.each do |genre| %>
-      <%= genre.name %>
-    <% end %>
-  </ul>
-</div>
+<%= render 'public/items/genre_list', genres: @genres %>
 
 <div>
   <p>
@@ -21,8 +14,16 @@
 <div>
   <h4>新着商品</h4>
   <% @items.each do |item| %>
-    <%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg' %>
-    <%= item.name %>
-    ¥<%= item.price.to_s(:delimited) %>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg' %>
+          </td>
+        </tr>
+        <tr><td><%= item.name %></td></tr>
+        <tr><td>¥<%= item.price.to_s(:delimited) %></td></tr>
+      </tbody>
+    </table>
   <% end %>
 </div>
