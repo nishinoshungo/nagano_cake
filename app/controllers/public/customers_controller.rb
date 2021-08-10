@@ -19,8 +19,9 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     customer = current_customer
-    customer.is_active = false
+    customer.is_active = "退会"
     customer.save
+    reset_session
     redirect_to root_path
   end
 
