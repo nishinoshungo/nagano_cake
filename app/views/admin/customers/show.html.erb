@@ -1,5 +1,5 @@
-<h4><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報</h4>
-<table>
+<h4 class="m-5"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報</h4>
+<table class="table mx-auto" style="width: 40vw">
   <tbody>
     <tr>
       <td>会員ID</td>
@@ -35,6 +35,7 @@
     </tr>
   </tbody>
 </table>
-
-<%= link_to "編集する", edit_admin_customer_path(@customer) %>
-<%= link_to "注文履歴一覧を見る", admin_path(order_sort: 1, customer_id: @customer.id) %>
+<div class="d-flex justify-content-center">
+ <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+ <%= link_to "注文履歴一覧を見る", admin_path(order_sort: 1, customer_id: @customer.id), class: "btn btn-primary ml-3" %>
+</div>

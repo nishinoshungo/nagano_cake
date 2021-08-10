@@ -10,34 +10,48 @@
 
   <body>
     <header>
-      <div class="header-logo">
-        <h1><%= link_to "ながのCAKE", root_path %></h1>
-      </div>
-      <% if admin_signed_in? %>
-        <li><%= link_to "商品一覧", admin_items_path %></li>
-        <li><%= link_to "会員一覧", admin_customers_path %></li>
-        <li><%= link_to "注文履歴一覧", admin_path %></li>
-        <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
-        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-      <% elsif customer_signed_in? %>
-        <p>ようこそ、<%= current_customer.last_name %>さん!</p>
-        <li><%= link_to "マイページ", customers_my_page_path %></li>
-        <li><%= link_to "商品一覧", items_path %></li>
-        <li><%= link_to "カート", cart_items_path %></li>
-        <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "About", about_path %></li>
-        <li><%= link_to "商品一覧", items_path %></li>
-        <li><%= link_to "新規登録", new_customer_registration_path %></li>
-        <li><%= link_to 'ログイン', new_customer_session_path %></li>
-      <% end %>
+      <nav class="navbar border-bottom">
+        <div class="container-fluid">
+            <%= link_to "ながのCAKE", root_path, class: "navbar-brand text-dark border p-2" %>
 
-      <%= form_with url: "/search", method: :get, local:true do |f| %>
-        <%= f.text_field :keyword %>
-        <%= f.submit "商品検索" %>
-      <% end %>
+            <% if customer_signed_in? %>
+              <p>ようこそ、<%= current_customer.last_name %>さん!</p>
+            <% end %>
+
+            <div>
+              <nav class="nav">
+                <% if admin_signed_in? %>
+                  <li class="nav-item"><%= link_to "商品一覧", admin_items_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "会員一覧", admin_customers_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "注文履歴一覧", admin_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "ジャンル一覧", admin_genres_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-dark m-2" %></li>
+                <% elsif customer_signed_in? %>
+                  <li class="nav-item"><%= link_to "マイページ", customers_my_page_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "商品一覧", items_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "カート", cart_items_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link btn btn-outline-dark m-2" %></li>
+                <% else %>
+                  <li class="nav-item"><%= link_to "About", about_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "商品一覧", items_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                  <li class="nav-item"><%= link_to 'ログイン', new_customer_session_path, class: "nav-link btn btn-outline-dark m-2" %></li>
+                <% end %>
+              </nav>
+              <div class="d-flex">
+                <%= form_with url: "/search", method: :get, class: "d-flex ml-auto", local:true do |f| %>
+                  <%= f.text_field :keyword, class: "form-control", size: 20, style: "width: 300px" %>
+                  <%= f.submit "商品検索", class: "btn btn-outline-success" %>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </nav>
 
     </header>
-    <%= yield %>
+    <div class="container-fluid mt-5 mb-5">
+      <%= yield %>
+    </div>
+    <footer class=" border-top" style="height: 100px;"></footer>
   </body>
 </html>

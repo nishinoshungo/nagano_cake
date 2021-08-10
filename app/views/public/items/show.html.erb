@@ -1,29 +1,36 @@
-<%= render 'public/items/genre_list', genres: @genres %>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= attachment_image_tag @item, :image, :fill, 200, 150, format: 'jpeg' %>
-    </div>
-    <div class="col">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><%= @item.name %></td>
-          </tr>
-          <tr>
-            <td><%= @item.introduction %></td>
-          </tr>
-          <tr>
-            <td>¥<%= @tax_include_price.floor.to_s(:delimited) %>(税込)</td>
-          </tr>
-        </tbody>
-      </table>
-      <%= form_with model: @cart_item, url: '/cart_items', local:true do |f| %>
-        <%= f.number_field :amount, placeholder: "個数選択", min: 1 %>
-        <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.submit "カートに入れる" %>
-      <% end %>
+<div class="row">
+  <div class="col-3">
+    <%= render 'public/items/genre_list', genres: @genres %>
+  </div>
+  <div class="col-9">
+    <div class="container">
+      <div class="row">
+        <div class="col-5">
+          <%= attachment_image_tag @item, :image, :fill, 200, 150, format: 'jpeg' %>
+        </div>
+        <div class="col-7">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td><h3><%= @item.name %></h3></td>
+              </tr>
+              <tr>
+                <td><%= @item.introduction %></td>
+              </tr>
+              <tr>
+                <td><span class="h5">¥<%= @tax_include_price.floor.to_s(:delimited) %></span>(税込)</td>
+              </tr>
+            </tbody>
+          </table>
+          <%= form_with model: @cart_item, url: '/cart_items', local:true do |f| %>
+            <%= f.number_field :amount, placeholder: "個数選択", min: 1 %>
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.submit "カートに入れる", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+

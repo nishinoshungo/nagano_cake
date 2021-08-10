@@ -1,7 +1,8 @@
-<h4>ショッピングカート</h4>
-<%= link_to "カートを空にする", "/cart_items", method: :delete %>
-<table>
-  <thead>
+<h4 class="m-5">ショッピングカート</h4>
+<p class="text-right"><%= link_to "カートを空にする", "/cart_items", method: :delete, class: "btn btn-danger" %></p>
+
+<table class="table table-bordered">
+  <thead class="table-secondary">
     <tr>
       <th>商品名</th>
       <th>単価(税込)</th>
@@ -20,26 +21,28 @@
         <td><%= tax_include_price.to_s(:delimited) %></td>
         <td>
           <%= form_with model: cart_item, method: :patch, url: "/cart_items/#{cart_item.id}", local:true do |f| %>
-            <%= f.number_field :amount, min: 1 %>
-            <%= f.submit "変更" %>
+            <%= f.number_field :amount, min: 1, style: "width: 50px" %>
+            <%= f.submit "変更", class: "btn btn-success" %>
           <% end %>
         </td>
         <td><%= subtotal.to_s(:delimited) %></td>
-        <td><%= link_to "削除する", "/cart_items/#{cart_item.id}", method: :delete %></td>
+        <td><%= link_to "削除する", "/cart_items/#{cart_item.id}", method: :delete, class: "btn btn-danger" %></td>
       </tr>
       <% total_price = total_price + subtotal %>
     <% end %>
   </tbody>
 </table>
-<table>
-  <tbody>
-    <tr>
-      <td>合計金額</td>
-      <td>
-        <%= total_price.to_s(:delimited) %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<%= link_to "買い物を続ける", items_path %>
-<%= link_to "情報入力へ進む", "/orders/new" %>
+<div class="d-flex justify-content-between">
+  <div class="col-3"><%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %></div>
+  <table class="table table-bordered col-3">
+    <tbody>
+      <tr>
+        <td class="table-secondary">合計金額</td>
+        <td><%= total_price.to_s(:delimited) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<p class="text-center mt-5"><%= link_to "情報入力へ進む", "/orders/new", class: "btn btn-success" %></p>

@@ -1,7 +1,7 @@
-<h4><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h4>
+<h4 class="m-5"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h4>
 
 <%= form_with model: @customer, url: "/admin/customers/#{@customer.id}", id: 'edit_customer', class: 'edit_customer', local: true do |f| %>
-  <table>
+  <table class="table table-borderless mx-auto" style="width: 50vw">
     <tbody>
       <tr>
         <td>会員ID</td>
@@ -37,7 +37,7 @@
       </tr>
       <tr>
         <td></td>
-        <td><%= f.submit "変更を保存" %></td>
+        <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
       </tr>
     </tbody>
   </table>

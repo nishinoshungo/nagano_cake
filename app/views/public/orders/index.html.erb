@@ -1,6 +1,6 @@
-<h4>注文履歴一覧</h4>
-<table>
-  <thead>
+<h4 class="m-5">注文履歴一覧</h4>
+<table class="table table-bordered">
+  <thead class="table-secondary">
     <tr>
       <th>注文日</th>
       <th>配送先</th>
@@ -26,7 +26,7 @@
         </td>
         <td><%= order.price.to_s(:delimited) %>円</td>
         <td><%= order.order_status %></td>
-        <td><%= link_to "表示する", "/orders/#{order.id}" %></td>
+        <td><%= link_to "表示する", "/orders/#{order.id}", class: "btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
